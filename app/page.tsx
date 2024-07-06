@@ -1,14 +1,16 @@
-
+import { unstable_noStore as noStore } from 'next/cache';
 import Link from 'next/link';
 import Image from 'next/image';
-import smashing from 'public/images/home/001.jpg';
-import naruto from 'public/images/home/001.jpg';
-import reactathon from 'public/images/home/002.jpg';
-import ship from 'public/images/home/001.jpg';
-import filming from 'public/images/home/001.jpg';
-import meetups from 'public/images/home/001.jpg';
-import vercel from 'public/images/home/001.jpg';
+import smashing from 'public/home/001.jpg';
+import summit from 'public/home/001.jpg';
+import reactathon from 'public/home/001.jpg';
+import ship from 'public/home/001.jpg';
+import filming from 'public/home/001.jpg';
+import meetups from 'public/home/001.jpg';
+import vercel from 'public/home/001.jpg';
 import avatar from 'app/avatar.jpg';
+import { PreloadResources } from 'app/preload';
+
 
 function Badge(props) {
   return (
@@ -19,8 +21,6 @@ function Badge(props) {
     />
   );
 }
-
-
 
 function ArrowIcon() {
   return (
@@ -40,51 +40,32 @@ function ArrowIcon() {
 }
 
 
-function BlogLink({ slug, name }) {
-  return (
-    <div className="group">
-      <a
-        href={`/blog/${slug}`}
-        className="flex w-full items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
-      >
-        <div className="flex flex-col">
-          <p className="font-medium text-neutral-900 dark:text-neutral-100">
-            {name}
-          </p>
-
-        </div>
-        <div className="transform text-neutral-700 transition-transform duration-300 group-hover:-rotate-12 dark:text-neutral-300">
-          <ArrowIcon />
-        </div>
-      </a>
-    </div>
-  );
-}
 
 export default function Page() {
   return (
     <section>
-      <div/>
+      <PreloadResources />
       <h1 className="mb-8 text-2xl font-medium tracking-tighter">
         hey, I'm ronnit 👋
       </h1>
       <p className="prose prose-neutral dark:prose-invert">
-        {`lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum `}
-        <Link href="/work">work</Link>
-        {` lorem ipsumlorem ipsum `}
+        {`I'm 16 year old tech enthusiast and developer from India.
+         I love all things tech and, I enjoy making things, mostly involving code, and 
+         I particularly enjoy working on projects related to programming and electronics. 
+         Also I get a kick out of using technology to connect reality to the interweb, checkout my `}
+        <Link href="/work"> github</Link>
+        {` for some awesome projects. `}
         <span className="not-prose">
 
         </span>
-        {`,lorem ipsumlorem ipsumlorem ipsumlorem ipsum `}
 
-        {` lorem ipsumlorem ipsumlorem ipsumlorem ipsum `}
         .
       </p>
       <div className="grid grid-cols-2 grid-rows-4 sm:grid-rows-3 sm:grid-cols-3 gap-4 my-8">
         <div className="relative h-40">
           <Image
             alt="Me speaking on stage at React Summit about the future of Next.js"
-            src={naruto}
+            src={summit}
             fill
             sizes="(max-width: 768px) 213px, 33vw"
             priority
@@ -144,35 +125,26 @@ export default function Page() {
       </div>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-        lorem ipsumlorem ipsumlorem ipsum
-        lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
-        lorem ipsumlorem ipsumlorem ipsum.
+          I create educational content for developers, teaching them about web
+          development, JavaScript and TypeScript, React and Next.js, and more.
+          This comes in all forms: blog posts, videos, tweets, conference talks,
+          and workshops. You can watch some of my favorites below.
         </p>
       </div>
 
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-        lorem ipsumlorem ipsumlorem ipsum
-        lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
-        lorem ipsumlorem ipsumlorem ipsum.
+          Over the past decade, I've written content on my blog and newsletter.
+          I try to keep things simple. You'll find writing about technologies
+          I'm interested in at the time, or how I'm learning and growing in my
+          career, sharing knowledge along the way.
         </p>
       </div>
 
-
-      
-
-      <div className="my-8 flex w-full flex-col space-y-4">
-        <BlogLink
-          name="Lorem ipsum"
-          slug="2024"
-        />
-        <BlogLink name="What is Developer Relations?" slug="devrel" />
-        <BlogLink name="The Story of Heroku" slug="heroku" />
-      </div>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-        Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-          Lorem ipsum.
+          I invest small angel checks into early stage startups building tools
+          for developers.
         </p>
       </div>
       <div className="my-8 flex h-14 w-full flex-row space-x-2 overflow-x-auto">
@@ -214,10 +186,10 @@ export default function Page() {
       </div>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-        Lorem ipsum{' '}
-          <Link href="/blog/2024">Lorem ipsum</Link>,{' '}
-          <Link href="/blog/2024">Lorem ipsum</Link>, Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-          Lorem ipsumLorem ipsumLorem ipsumLorem ipsum.
+          I've worked with and advised companies on{' '}
+          <Link href="/blog/developer-marketing">developer marketing</Link>,{' '}
+          <Link href="/blog/devrel">developer relations</Link>, building
+          open-source communities, product-led growth, and more.
         </p>
       </div>
       <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
@@ -226,7 +198,7 @@ export default function Page() {
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
-            href="https://twitter.com/RonnitNath"
+            href="https://twitter.com/leeerob"
           >
             <ArrowIcon />
             <p className="ml-2 h-7">follow me</p>
@@ -237,7 +209,7 @@ export default function Page() {
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
-            href="https://ronnitnath.substack.com"
+            href="https://leerob.substack.com"
           >
             <ArrowIcon />
             <p className="ml-2 h-7">get email updates</p>
