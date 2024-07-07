@@ -14,9 +14,10 @@ export const metadata: Metadata = {
     template: '%s | Ronnit Nath',
   },
   description: 'Developer. Student. Researcher.',
+  keywords: 'developer, student, researcher, Ronnit Nath, software development, technology',
   openGraph: {
     title: 'Ronnit Nath',
-    description: 'Developer, writer, and creator.',
+    description: 'Developer. Student. Researcher.',
     url: 'https://ronnitnath.com',
     siteName: 'Ronnit Nath',
     locale: 'en_US',
