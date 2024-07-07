@@ -1,16 +1,25 @@
-import { unstable_noStore as noStore } from 'next/cache';
+import { Suspense } from 'react';
+import { PreloadResources } from '../app/preload';
 import Link from 'next/link';
 import Image from 'next/image';
-import smashing from 'public/home/001.jpg';
-import summit from 'public/home/001.jpg';
-import reactathon from 'public/home/001.jpg';
-import ship from 'public/home/001.jpg';
-import filming from 'public/home/001.jpg';
-import meetups from 'public/home/001.jpg';
-import vercel from 'public/home/001.jpg';
-import avatar from 'app/avatar.jpg';
-import { PreloadResources } from 'app/preload';
+import React from 'react'; // Ensure React is imported
+import ViewCounter from 'app/blog/view-counter';
+import {
+  getLeeYouTubeSubs,
+  getVercelYouTubeSubs,
+  getViewsCount,
+} from 'app/db/queries';
 
+// Import images correctly from the public folder
+import smashing from 'public/images/001.jpg';
+import summit from 'public/images/001.jpg';
+import reactathon from 'public/images/001.jpg';
+import ship from 'public/images/001.jpg';
+import filming from 'public/images/001.jpg';
+import meetups from 'public/images/001.jpg';
+ 
+// Import avatar image correctly
+import avatar from '/app/avatar.jpg';
 
 function Badge(props) {
   return (
@@ -39,9 +48,35 @@ function ArrowIcon() {
   );
 }
 
+function BlogLink({ slug, name }) {
+  return (
+    <div className="group">
+      <a
+        href={`/blog/${slug}`}
+        className="flex w-full items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
+      >
+        <div className="flex flex-col">
+          <p className="font-medium text-neutral-900 dark:text-neutral-100">
+            {name}
+          </p>
+          <Suspense fallback={<p className="h-6" />}>
+            <Views slug={slug} />
+          </Suspense>
+        </div>
+        <div className="transform text-neutral-700 transition-transform duration-300 group-hover:-rotate-12 dark:text-neutral-300">
+          <ArrowIcon />
+        </div>
+      </a>
+    </div>
+  );
+}
 
+async function Views({ slug }: { slug: string }) {
+  let views = await getViewsCount();
+  return <ViewCounter allViews={views} slug={slug} />;
+}
 
-export default function Page() {
+export default function HomePage() {
   return (
     <section>
       <PreloadResources />
@@ -49,77 +84,74 @@ export default function Page() {
         hey, I'm ronnit 👋
       </h1>
       <p className="prose prose-neutral dark:prose-invert">
-        {`I'm 16 year old tech enthusiast and developer from India.
-         I love all things tech and, I enjoy making things, mostly involving code, and 
-         I particularly enjoy working on projects related to programming and electronics. 
-         Also I get a kick out of using technology to connect reality to the interweb, checkout my `}
-        <Link href="/work"> github</Link>
-        {` for some awesome projects. `}
-        <span className="not-prose">
-
-        </span>
-
-        .
+        I'm a 16-year-old tech enthusiast and developer from India. I love all
+        things tech and enjoy creating things, especially involving code. I
+        particularly enjoy working on projects related to programming and
+        electronics. Check out my{' '}
+        <Link href="/work">
+          <span className="text-blue-500">GitHub</span>
+        </Link>{' '}
+        for some awesome projects.
       </p>
       <div className="grid grid-cols-2 grid-rows-4 sm:grid-rows-3 sm:grid-cols-3 gap-4 my-8">
         <div className="relative h-40">
           <Image
-            alt="Me speaking on stage at React Summit about the future of Next.js"
+            alt="React Summit"
             src={summit}
-            fill
-            sizes="(max-width: 768px) 213px, 33vw"
-            priority
-            className="rounded-lg object-cover"
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            className="rounded-lg"
           />
         </div>
         <div className="relative sm:row-span-2 row-span-1">
           <Image
-            alt="Me standing on stage at Reactathon delivering the keynote"
+            alt="Reactathon"
             src={reactathon}
-            fill
-            sizes="(max-width: 768px) 213px, 33vw"
-            priority
-            className="rounded-lg object-cover object-top sm:object-center"
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            className="rounded-lg"
           />
         </div>
         <div className="relative">
           <Image
-            alt="Me and Guillermo Rauch on stage for Vercel Ship, answering questions from the Next.js community"
+            alt="Vercel Ship"
             src={ship}
-            fill
-            sizes="(max-width: 768px) 213px, 33vw"
-            priority
-            className="rounded-lg object-cover"
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            className="rounded-lg"
           />
         </div>
         <div className="relative row-span-2">
           <Image
-            alt="Me, Lydia, and Delba filming the Next.js Conf keynote"
+            alt="Filming at Next.js Conf"
             src={filming}
-            fill
-            sizes="(max-width: 768px) 213px, 33vw"
-            priority
-            className="rounded-lg object-cover sm:object-center"
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            className="rounded-lg"
           />
         </div>
         <div className="relative row-span-2">
           <Image
-            alt="My badge on top of a pile of badges from a Vercel meetup we held"
+            alt="Vercel Meetups"
             src={meetups}
-            fill
-            sizes="(max-width: 768px) 213px, 33vw"
-            priority
-            className="rounded-lg object-cover"
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            className="rounded-lg"
           />
         </div>
         <div className="relative h-40">
           <Image
-            alt="Me standing on stage at SmashingConf giving a talk about my optimism for the web"
+            alt="SmashingConf"
             src={smashing}
-            fill
-            sizes="(max-width: 768px) 213px, 33vw"
-            priority
-            className="rounded-lg object-cover"
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            className="rounded-lg"
           />
         </div>
       </div>
@@ -140,80 +172,115 @@ export default function Page() {
           career, sharing knowledge along the way.
         </p>
       </div>
-
+      <div className="my-8 flex w-full flex-col space-y-4">
+        <BlogLink
+          name="What Makes A Great Developer Experience?"
+          slug="developer-experience"
+        />
+        <BlogLink name="What is Developer Relations?" slug="devrel" />
+        <BlogLink name="The Story of Heroku" slug="heroku" />
+      </div>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
           I invest small angel checks into early stage startups building tools
           for developers.
         </p>
       </div>
+
       <div className="my-8 flex h-14 w-full flex-row space-x-2 overflow-x-auto">
         <div className="flex items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-          <a href="https://linear.app">
-            <svg width="78" height="20" role="img" aria-label="Linear logo">
-              <use href="/sprite.svg#linear" />
-            </svg>
-          </a>
+          <Link href="https://linear.app">
+            <span>
+              <svg width="78" height="20" role="img" aria-label="Linear logo">
+                <use href="/sprite.svg#linear" />
+              </svg>
+            </span>
+          </Link>
         </div>
         <div className="flex items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-          <a href="https://supabase.com">
-            <svg width="100" height="19" role="img" aria-label="Supabase logo">
-              <use href="/sprite.svg#supabase" />
-            </svg>
-          </a>
+          <Link href="https://supabase.com">
+            <span>
+              <svg width="100" height="19" role="img" aria-label="Supabase logo">
+                <use href="/sprite.svg#supabase" />
+              </svg>
+            </span>
+          </Link>
         </div>
         <div className="flex items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-          <a href="https://www.makeswift.com/blog/makeswift-is-joining-bigcommerce">
-            <svg width="96" height="19" role="img" aria-label="Makeswift logo">
-              <use href="/sprite.svg#makeswift" />
-            </svg>
-          </a>
+          <Link href="https://www.makeswift.com/blog/makeswift-is-joining-bigcommerce">
+            <span>
+              <svg width="96" height="19" role="img" aria-label="Makeswift logo">
+                <use href="/sprite.svg#makeswift" />
+              </svg>
+            </span>
+          </Link>
         </div>
         <div className="flex items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-          <a href="https://resend.com">
-            <svg width="70" height="17" role="img" aria-label="Resend logo">
-              <use href="/sprite.svg#resend" />
-            </svg>
-          </a>
+          <Link href="https://resend.com">
+            <span>
+              <svg width="70" height="17" role="img" aria-label="Resend logo">
+                <use href="/sprite.svg#resend" />
+              </svg>
+            </span>
+          </Link>
         </div>
         <div className="flex items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-          <a href="https://bun.sh">
-            <svg width="35" height="27" role="img" aria-label="Bun logo">
-              <use href="/sprite.svg#bun" />
-            </svg>
-          </a>
+          <Link href="https://bun.sh">
+            <span>
+              <svg width="35" height="27" role="img" aria-label="Bun logo">
+                <use href="/sprite.svg#bun" />
+              </svg>
+            </span>
+          </Link>
         </div>
       </div>
+
       <div className="prose prose-neutral dark:prose-invert">
         <p>
           I've worked with and advised companies on{' '}
-          <Link href="/blog/developer-marketing">developer marketing</Link>,{' '}
-          <Link href="/blog/devrel">developer relations</Link>, building
-          open-source communities, product-led growth, and more.
+          <Link href="/blog/developer-marketing">
+            <span className="text-blue-500">developer marketing</span>
+          </Link>
+          ,{' '}
+          <Link href="/blog/devrel">
+            <span className="text-blue-500">developer relations</span>
+          </Link>
+          , building open-source communities, product-led growth, and more.
         </p>
       </div>
+
       <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
         <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://twitter.com/leeerob"
-          >
-            <ArrowIcon />
-            <p className="ml-2 h-7">follow me</p>
-          </a>
+          <Link href="https://twitter.com/leeerob">
+            <span className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100">
+              <ArrowIcon />
+              Twitter
+            </span>
+          </Link>
         </li>
         <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://leerob.substack.com"
-          >
-            <ArrowIcon />
-            <p className="ml-2 h-7">get email updates</p>
-          </a>
+          <Link href="https://github.com/leerob">
+            <span className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100">
+              <ArrowIcon />
+              GitHub
+            </span>
+          </Link>
+        </li>
+        <li>
+          <Link href="https://www.linkedin.com/in/leerob/">
+            <span className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100">
+              <ArrowIcon />
+              LinkedIn
+            </span>
+          </Link>
+        </li>
+        <li>
+          <Link href="https://www.youtube.com/channel/leerob">
+            <span className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100">
+              <ArrowIcon />
+              YouTube
+            </span>
+          </Link>
         </li>
       </ul>
     </section>

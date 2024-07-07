@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import { promises as fs, existsSync } from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 
@@ -34,16 +34,39 @@ const workPage = `export default function Page() {
 }
 `;
 
-const deleteFolderRecursive = async (path) => {
-  const stat = await fs.stat(path);
-  if (stat.isDirectory()) {
-    const files = await fs.readdir(path);
-    await Promise.all(
-      files.map((file) => deleteFolderRecursive(`${path}/${file}`))
-    );
-    await fs.rmdir(path);
-  } else {
-    await fs.unlink(path);
+const setupDirectories = async () => {
+  const contentDir = path.join(process.cwd(), 'content');
+  const imagesDir = path.join(process.cwd(), 'public', 'images');
+  const appDir = path.join(process.cwd(), 'app');
+  const workDir = path.join(process.cwd(), 'app', 'work');
+
+  try {
+    // Ensure directories exist or create them
+    if (!existsSync(contentDir)) {
+      await fs.mkdir(contentDir, { recursive: true });
+    }
+
+    if (!existsSync(imagesDir)) {
+      await fs.mkdir(imagesDir, { recursive: true });
+    }
+
+    // Write initial template files if they don't exist
+    const templateFilePath = path.join(contentDir, 'hello-world.mdx');
+    if (!existsSync(templateFilePath)) {
+      await fs.writeFile(templateFilePath, template);
+    }
+
+    const homePageFilePath = path.join(appDir, 'page.tsx');
+    if (!existsSync(homePageFilePath)) {
+      await fs.writeFile(homePageFilePath, homePage);
+    }
+
+    const workPageFilePath = path.join(workDir, 'page.tsx');
+    if (!existsSync(workPageFilePath)) {
+      await fs.writeFile(workPageFilePath, workPage);
+    }
+  } catch (err) {
+    console.error('Error setting up directories and files:', err);
   }
 };
 
@@ -52,20 +75,9 @@ const deleteFolderRecursive = async (path) => {
 
   if (process.env.IS_TEMPLATE === 'false') {
     // This means it's not the template, it's my legit site
-    // I orderride the env variable for my site. This means that when
-    // folks clone this repo for the first time, it will delete my personal content
+    // Override the env variable for your site setup here
     return;
   }
 
-  const contentDir = path.join(process.cwd(), 'content');
-  const imagesDir = path.join(process.cwd(), 'public', 'images');
-  const appDir = path.join(process.cwd(), 'app');
-  const workDir = path.join(process.cwd(), 'app', 'work');
-
-  await deleteFolderRecursive(contentDir);
-  await deleteFolderRecursive(imagesDir);
-  await fs.mkdir(contentDir);
-  await fs.writeFile(path.join(contentDir, 'hello-world.mdx'), template);
-  await fs.writeFile(path.join(appDir, 'page.tsx'), homePage);
-  await fs.writeFile(path.join(workDir, 'page.tsx'), workPage);
+  await setupDirectories();
 })();
