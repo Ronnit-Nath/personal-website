@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: 'Ronnit Nath',
     template: '%s | Ronnit Nath',
   },
-  description: 'Developer, writer, and creator.',
+  description: 'Developer. Student. Researcher.',
   openGraph: {
     title: 'Ronnit Nath',
     description: 'Developer, writer, and creator.',
