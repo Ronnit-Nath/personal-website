@@ -69,7 +69,11 @@ export default function RootLayout({
           {children}
           <Analytics />
           <SpeedInsights />
+          <div className="font-monospace uppercase opacity-100 flex-auto min-w-0 mt-6 flex flex-col px-0 md:px-0">
+          Copyright {new Date().getFullYear()} ©️RONNIT NATH.
+        </div>
         </main>
+
       </body>
     </html>
   );

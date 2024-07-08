@@ -174,10 +174,10 @@ export default function HomePage() {
       </div>
       <div className="my-8 flex w-full flex-col space-y-4">
         <BlogLink
-          name="What Makes A Great Developer Experience?"
-          slug="developer-experience"
+          name="Hello World"
+          slug="hello-world"
         />
-        <BlogLink name="What is Developer Relations?" slug="devrel" />
+        <BlogLink name="How I Became a Software Engineer (From Designer to Developer)" slug="career" />
         <BlogLink name="The Story of Heroku" slug="heroku" />
       </div>
       <div className="prose prose-neutral dark:prose-invert">
@@ -254,7 +254,7 @@ export default function HomePage() {
           <Link href="https://twitter.com/leeerob">
             <span className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100">
               <ArrowIcon />
-              Twitter
+              <span className="ml-2 h-7">follow me</span>
             </span>
           </Link>
         </li>
@@ -262,27 +262,12 @@ export default function HomePage() {
           <Link href="https://github.com/leerob">
             <span className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100">
               <ArrowIcon />
-              GitHub
-            </span>
-          </Link>
-        </li>
-        <li>
-          <Link href="https://www.linkedin.com/in/leerob/">
-            <span className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100">
-              <ArrowIcon />
-              LinkedIn
-            </span>
-          </Link>
-        </li>
-        <li>
-          <Link href="https://www.youtube.com/channel/leerob">
-            <span className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100">
-              <ArrowIcon />
-              YouTube
+             <span className="ml-2 h-7">get email updates</span>
             </span>
           </Link>
         </li>
       </ul>
+      
     </section>
   );
 }
