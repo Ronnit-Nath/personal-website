@@ -84,7 +84,7 @@ export default function HomePage() {
         hey, I'm ronnit 👋
       </h1>
       <p className="prose prose-neutral dark:prose-invert">
-        I'm a 16-year-old tech enthusiast and developer from India. I love all
+        I'm a 17-year-old tech enthusiast and developer from India. I love all
         things tech and enjoy creating things, especially involving code. I
         particularly enjoy working on projects related to programming and
         electronics. Check out my{' '}
