@@ -84,7 +84,7 @@ export default function HomePage() {
         hey, I'm ronnit 👋
       </h1>
       <p className="prose prose-neutral dark:prose-invert">
-        I'm a 16-year-old tech enthusiast and developer from India. I love all
+        I'm a 17-year-old tech enthusiast and developer from India. I love all
         things tech and enjoy creating things, especially involving code. I
         particularly enjoy working on projects related to programming and
         electronics. Check out my{' '}
@@ -157,33 +157,33 @@ export default function HomePage() {
       </div>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          I create educational content for developers, teaching them about web
-          development, JavaScript and TypeScript, React and Next.js, and more.
-          This comes in all forms: blog posts, videos, tweets, conference talks,
-          and workshops. You can watch some of my favorites below.
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+        Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum.
         </p>
       </div>
 
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          Over the past decade, I've written content on my blog and newsletter.
-          I try to keep things simple. You'll find writing about technologies
-          I'm interested in at the time, or how I'm learning and growing in my
-          career, sharing knowledge along the way.
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+        Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum.
         </p>
       </div>
       <div className="my-8 flex w-full flex-col space-y-4">
         <BlogLink
-          name="Hello World"
+          name="Lorem Ipsum"
           slug="hello-world"
         />
-        <BlogLink name="How I Became a Software Engineer (From Designer to Developer)" slug="career" />
-        <BlogLink name="The Story of Heroku" slug="heroku" />
+        <BlogLink 
+        name="Lorem Ipsum" 
+        slug="career" />
+        <BlogLink 
+        name="Lorem Ipsum" 
+        slug="heroku" />
       </div>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          I invest small angel checks into early stage startups building tools
-          for developers.
+        Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+         Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum.
         </p>
       </div>
 

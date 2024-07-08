@@ -19,6 +19,7 @@ export default function GuestbookPage() {
         <GuestbookForm />
         <GuestbookEntries />
       </Suspense>
+
     </section>
   );
 }
