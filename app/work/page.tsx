@@ -3,12 +3,14 @@ import '../layout'; // Make sure to import the CSS file
 
 const projects = [
   {
-    title: "Lorem Ipsum ",
-    description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum.",
+    title: "AMR Predict",
+    date:"2024 - Present",
+    description: "Creating a tool that combines AI and genomic information to predict antibiotic resistance is essential in addressing this issue.",
     link: "https://math.mit.edu/research/highschool/rsi/",
   },
   {
-    title: "Lorem Ipsum",
+    title: "CogniLink",
+    date:"2023 - Present",
     description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum.",
     link: "https://example.com/desimone-lab",
   },
@@ -50,6 +52,8 @@ const Projects = () => {
       {projects.map((project, index) => (
         <a href={project.link} className="card font-mono" key={index}>
           <div className="card-title">{project.title}</div>
+          <div className="card-date font-mono text-black">{project.date}</div>
+          <br />
           <div className="card-description">{project.description}</div>
         </a>
       ))}
